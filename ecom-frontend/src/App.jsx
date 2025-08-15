@@ -1,0 +1,55 @@
+import React from 'react';
+import './App.css'
+import About from './components/About';
+import Contact from './components/contact';
+import Home from './components/home/Home';
+import Navbar from './components/Navbar';
+import Products from './components/products/Products'
+import { BrowserRouter as Router , Routes , Route} from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import Cart from './components/cart/Cart';
+import LogIn from './components/auth/login';
+import Register from './components/auth/Register';
+import PrivateRoute from './components/shared/PrivateRoute';
+import Checkout from './components/checkout/Checkout';
+import PaymentConfirmation from './components/checkout/PaymentConfirmation';
+import Orders from './components/checkout/Orders';
+import Profile from './components/Profile';
+import AddressInfo from './components/checkout/AddressInfo';
+
+function App() {
+
+  return (
+    <>
+    <React.Fragment>
+    <Router>
+      <Navbar/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/products' element={<Products/>}/>
+        <Route path='/about' element={<About/>}/>
+         <Route path='/contact' element={<Contact/>}/>
+         <Route path='/cart' element={<Cart/>}/>
+      
+          <Route path='/' element={<PrivateRoute publicPage />}>
+          <Route path='/login' element={ <LogIn />}/>                                       
+          <Route path='/register' element={ <Register />}/>
+          </Route>
+
+           <Route path='/' element={<PrivateRoute />}>
+           <Route path='/profile' element={ <Profile />}/>
+           <Route path='/address' element={ <AddressInfo />}/>
+           <Route path='/checkout' element={ <Checkout />}/>
+           <Route path='/profile/orders' element={ <Orders />}/>
+           <Route path='/order-confirm' element={ <PaymentConfirmation />}/>
+          </Route> 
+ 
+    </Routes>
+    </Router>
+    <Toaster position='bottom-center'/>
+    </React.Fragment>
+    </>
+  )
+}
+
+export default App
