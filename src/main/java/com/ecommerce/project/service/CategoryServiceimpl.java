@@ -36,6 +36,7 @@ public class CategoryServiceimpl implements CategoryService {
 
     @Override
     public CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
+        //List<Category> categories = categoryRepositories.findall(); //earlier used but now so much chaged
         //return categories;  now we are using category repository(1)
         //return categoryRepository.findAll(); we have handled with exception now(2)
         Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc")
@@ -52,6 +53,7 @@ public class CategoryServiceimpl implements CategoryService {
                 .map(category->modelMapper.map(category, CategoryDTO.class))
                 .toList();
 
+        //metadata
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setContent(categoryDTOS);
         categoryResponse.setPageNumber(categoryPage.getNumber());

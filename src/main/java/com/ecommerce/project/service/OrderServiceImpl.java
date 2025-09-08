@@ -106,4 +106,25 @@ public class OrderServiceImpl implements OrderService {
 
         return orderDTO;
     }
+
+    @Override
+    public List<OrderDTO> getOrdersByEmail(String emailId) {
+        List<Order> orders = orderRepository.findByEmail(emailId);
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+
+        for (Order order : orders) {
+            OrderDTO orderDTO = modelMapper.map(order, OrderDTO.class);
+            List<OrderItem> orderItems = orderItemRepository.findAllByOrderOrderId(order.getOrderId());
+            for (OrderItem item : orderItems) {
+                orderDTO.getOrderItems().add(modelMapper.map(item, OrderItemDTO.class));
+            }
+            if (order.getAddress() != null) {
+                orderDTO.setAddressId(order.getAddress().getAddressId());
+            }
+            orderDTOList.add(orderDTO);
+        }
+
+        return orderDTOList;
+    }
+
 }

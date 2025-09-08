@@ -32,7 +32,7 @@ public class CategoryController {
 
     //@GetMapping("/api/public/categories")
     //@RequestMapping(value="/public/categories",method= RequestMethod.GET)    //another use of request mapping calling get/put.. through it
-    @RequestMapping("/public/categories")
+    @GetMapping("/public/categories")
     public ResponseEntity<CategoryResponse> getAllCategories( @RequestParam(name="pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
                                                               @RequestParam(name="pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize ,
                                                               @RequestParam(name="sortBy" , defaultValue = AppConstants.SORT_CATEGORIES_BY, required = false) String sortBy ,
@@ -57,9 +57,9 @@ public class CategoryController {
     {
         {
             CategoryDTO deleteCategory = categoryService.deleteCategory(categoryId);
+            return new ResponseEntity<>(deleteCategory, HttpStatus.OK);  //most common one
             // or return ResponseEntity.ok(status);
-            // or return new ResponseEntity<>(status, HttpStatus.OK);  most common one
-            return ResponseEntity.status(HttpStatus.OK).body(deleteCategory);
+            // or return ResponseEntity.status(HttpStatus.OK).body(deleteCategory);
         }
 //        catch(ResponseStatusException e)
 //        {

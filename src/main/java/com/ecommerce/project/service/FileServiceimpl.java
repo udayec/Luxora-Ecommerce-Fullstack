@@ -22,10 +22,9 @@ public class FileServiceimpl implements FileService{
         File folder = new File(path);
         if(!folder.exists()) //check if path exist and create
             folder.mkdir();  //create the folder
-        Files.copy(file.getInputStream() , Paths.get(filePath));
+        Files.copy(file.getInputStream() , Paths.get(filePath));  //copy them to server
         return fileName;
 
     }
-
 
 }

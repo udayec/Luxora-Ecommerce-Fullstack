@@ -1,3 +1,6 @@
+# Never commit environment variables
+.env
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
